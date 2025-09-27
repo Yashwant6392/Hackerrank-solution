@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int weights[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &weights[i]);
+    }
+
+    qsort(weights, n, sizeof(int), compare);
+
+    int containers = 1;
+    int min_weight = weights[0];
+
+    for (int i = 1; i < n; i++) {
+        if (weights[i] > min_weight + 4) {
+            containers++;
+            min_weight = weights[i];
+        }
+    }
+
+    printf("%d\n", containers);
+    return 0;
+}
