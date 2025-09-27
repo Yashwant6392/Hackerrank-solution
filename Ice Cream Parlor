@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    int t;
+    scanf("%d", &t);  // read number of trips
+
+    while (t-- > 0) {
+        int m, n;
+        scanf("%d", &m);  // total money
+        scanf("%d", &n);  // number of flavors
+
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &arr[i]);
+        }
+
+        // Find two flavors whose costs sum to m
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (arr[i] + arr[j] == m) {
+                    // Print 1-based indices sorted ascending
+                    if (i + 1 < j + 1)
+                        printf("%d %d\n", i + 1, j + 1);
+                    else
+                        printf("%d %d\n", j + 1, i + 1);
+                    break;  // since only one unique solution per test case
+                }
+            }
+        }
+    }
+
+    return 0;
+}
