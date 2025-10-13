@@ -1,0 +1,27 @@
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t; // Number of test cases
+
+    while (t--) {
+        int n, a, b;
+        cin >> n >> a >> b;
+
+        set<int> results;
+
+        for (int i = 0; i < n; ++i) {
+            int value = a * i + b * (n - 1 - i);
+            results.insert(value);
+        }
+
+        for (int val : results) {
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
