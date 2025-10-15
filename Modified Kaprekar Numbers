@@ -1,0 +1,22 @@
+
+void kaprekarNumbers(int p, int q) {
+    bool found = false;
+    for (int i = p; i <= q; i++) {
+        long long sq = (long long)i * i;
+        string str = to_string(sq);
+        int len = str.length();
+        string left = str.substr(0, len / 2);
+        string right = str.substr(len / 2);
+
+        int l = (left.empty()) ? 0 : stoi(left);
+        int r = (right.empty()) ? 0 : stoi(right);
+
+        if (l + r == i) {
+            cout << i << " ";
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "INVALID RANGE";
+    }
+}
