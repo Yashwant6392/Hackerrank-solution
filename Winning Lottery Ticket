@@ -1,0 +1,41 @@
+int getMask(const string& ticket) {
+    int mask = 0;
+    for (char ch : ticket) {
+        mask |= 1 << (ch - '0');
+    }
+    return mask;
+}
+
+long long winningLotteryTicket(vector<string>& tickets) {
+    unordered_map<int, long long> maskCount;
+
+    // Count how many tickets have each digit mask
+    for (const string& ticket : tickets) {
+        int mask = getMask(ticket);
+        maskCount[mask]++;
+    }
+
+    long long totalPairs = 0;
+    vector<int> masks;
+
+    // Store all unique masks
+    for (auto& entry : maskCount) {
+        masks.push_back(entry.first);
+    }
+
+    // Check all pairs of masks
+    for (size_t i = 0; i < masks.size(); ++i) {
+        for (size_t j = i; j < masks.size(); ++j) {
+            int combined = masks[i] | masks[j];
+            if (combined == (1 << 10) - 1) {
+                if (i == j) {
+                    totalPairs += maskCount[masks[i]] * (maskCount[masks[i]] - 1) / 2;
+                } else {
+                    totalPairs += maskCount[masks[i]] * maskCount[masks[j]];
+                }
+            }
+        }
+    }
+
+    return totalPairs;
+}
